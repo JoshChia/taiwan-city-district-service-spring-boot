@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- MySql jar檔位置 -->
+    <classPathEntry location="C:/8.0.21/mysql-connector-java-8.0.21.jar"/>
+    <context id="context1" defaultModelType="flat"
+             targetRuntime="MyBatis3Simple"><!-- 產生的model為flat型式。產生傳統的MyBatis Mapper及可，不要產生新的Example檔 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/><!-- 不要產生MBG的註解 -->
+            <property name="suppressDate" value="true"/><!-- 不要產生日期註解 -->
+        </commentGenerator>
+        <!-- MySql 連線資料設定 -->
+        <jdbcConnection
+                connectionURL="jdbc:mysql://localhost:3306/ecip?useUnicode=yes&amp;characterEncoding=UTF-8&amp;enabledTLSProtocols=TLSv1.2&amp;serverTimezone=Asia/Taipei"
+                driverClass="com.mysql.cj.jdbc.Driver" password="root1234"
+                userId="admin">
+            <property name="nullCatalogMeansCurrent"
+                      value="true"/><!-- MySQL不支援schema及catelog的設定 -->
+        </jdbcConnection>
+        <javaTypeResolver>
+            <!-- <property name="useJSR310Types" value="true" />日期或時間戳記不使用java.util.Date，改用Java 8的java.time.LocalDate -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!-- 要產生的model位置，targetProject的值為專案的Source folder，所以是YOURPROJECT/src/main/java -->
+        <javaModelGenerator
+                targetPackage="com.example.taiwancityservice.entity"
+                targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </javaModelGenerator>
+        <!-- 要產生的MyBatis Mapper位置 -->
+        <sqlMapGenerator targetPackage="mappers"
+                         targetProject="src/main/resources"/>
+        <!-- 要產生的DAO位置 -->
+        <javaClientGenerator
+                targetPackage="com.example.taiwancityservice.dao"
+                targetProject="src/main/java" type="XMLMAPPER"/>
+        <!-- 設定要產生哪一個資料表的model -->
+        <table tableName="taiwan_city_district" domainObjectName="TaiwanCityDistrict"/>
+    </context>
+</generatorConfiguration>

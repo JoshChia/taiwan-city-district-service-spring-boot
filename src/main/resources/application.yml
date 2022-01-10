@@ -1,0 +1,26 @@
+mybatis:
+  mapper-locations: classpath:mappers/**/*Mapper.xml
+
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: 'health, info, env, prometheus, metrics, httptrace, threaddump, heapdump, loggers'
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+
+server:
+  port: 8302
+  servlet:
+    encoding:
+      force: true
+    context-path: /taiwan-city

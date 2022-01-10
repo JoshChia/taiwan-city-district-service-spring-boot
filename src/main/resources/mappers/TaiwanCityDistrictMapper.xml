@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.taiwancityservice.dao.TaiwanCityDistrictMapper">
+  <resultMap id="BaseResultMap" type="com.example.taiwancityservice.entity.TaiwanCityDistrict">
+    <id column="city" jdbcType="VARCHAR" property="city" />
+    <id column="district" jdbcType="VARCHAR" property="district" />
+    <result column="ser_no" jdbcType="VARCHAR" property="serNo" />
+    <result column="data_create_time" jdbcType="TIMESTAMP" property="dataCreateTime" />
+    <result column="data_update_time" jdbcType="TIMESTAMP" property="dataUpdateTime" />
+    <result column="data_update_user" jdbcType="VARCHAR" property="dataUpdateUser" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from taiwan_city_district
+    where city = #{city,jdbcType=VARCHAR}
+      and district = #{district,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.taiwancityservice.entity.TaiwanCityDistrict">
+    insert into taiwan_city_district (city, district, ser_no, 
+      data_create_time, data_update_time, data_update_user
+      )
+    values (#{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{serNo,jdbcType=VARCHAR}, 
+      #{dataCreateTime,jdbcType=TIMESTAMP}, #{dataUpdateTime,jdbcType=TIMESTAMP}, #{dataUpdateUser,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.taiwancityservice.entity.TaiwanCityDistrict">
+    update taiwan_city_district
+    set ser_no = #{serNo,jdbcType=VARCHAR},
+      data_create_time = #{dataCreateTime,jdbcType=TIMESTAMP},
+      data_update_time = #{dataUpdateTime,jdbcType=TIMESTAMP},
+      data_update_user = #{dataUpdateUser,jdbcType=VARCHAR}
+    where city = #{city,jdbcType=VARCHAR}
+      and district = #{district,jdbcType=VARCHAR}
+  </update>
+  <update id="updateCityDistrictByPrimaryKey"  parameterType="com.example.taiwancityservice.entity.TaiwanCityDistrict">
+    update taiwan_city_district
+    set city = #{record.city,jdbcType=VARCHAR},
+        district = #{record.district,jdbcType=VARCHAR},
+        data_update_time = #{record.dataUpdateTime,jdbcType=TIMESTAMP},
+        data_update_user = #{record.dataUpdateUser,jdbcType=TIMESTAMP}
+    where city = #{oldCity,jdbcType=VARCHAR}
+        and district = #{oldDistrict,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select city, district, ser_no, data_create_time, data_update_time, data_update_user
+    from taiwan_city_district
+    where city = #{city,jdbcType=VARCHAR}
+      and district = #{district,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select city, district, ser_no, data_create_time, data_update_time, data_update_user
+    from taiwan_city_district
+  </select>
+  <select id="selectByCityAndDistrict" resultMap="BaseResultMap">
+    select city, district, ser_no, data_create_time, data_update_time, data_update_user
+    from taiwan_city_district
+    <where>
+      <if test="city != '' and district != ''">
+        city = #{city,jdbcType=VARCHAR}
+        and district = #{district,jdbcType=VARCHAR}
+      </if>
+      <if test="city != '' and district == ''">
+        city = #{city,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+</mapper>

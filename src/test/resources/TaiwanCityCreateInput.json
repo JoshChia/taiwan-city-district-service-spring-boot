@@ -1,0 +1,14 @@
+{
+  "Header": {
+    "UserId": "user1@gmail.com",
+    "EnterpriseId": "70827406",
+    "RequestFrom": "ECIP01-UI-01-001",
+    "RequestTimestamp": "2018-08-19 10:33:13",
+    "ApiCallingFlow": "ECIP01-UI-01-001;"
+  },
+  "Body": {
+    "City": "台北市",
+    "District": "第十三州",
+    "SerNo": "7891"
+  }
+}
